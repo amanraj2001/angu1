@@ -1,0 +1,68 @@
+<p>form works!</p>
+
+
+<div class="container">
+    <form [formGroup]="stdform">
+        <label for="">name</label>
+        <input type="text" formControlName="name" class="form-control">
+        <div *ngIf="nam && nam.invalid && nam.touched" class="error">
+            Field is Empty
+
+        </div>
+        
+        <label for="">Roll no.</label>
+        <input type="text" formControlName="rollno" class="form-control">
+        <div *ngIf="rno && rno.invalid && rno.touched">
+            <div *ngIf="rno.errors?.['required']" class="error">
+                Field is Empty
+
+            </div>
+            <div *ngIf="rno.errors?.['pattern']" class="error">
+                digits exceeds the required length , that is 3
+            </div>
+
+        </div>
+        <ng-container formGroupName="address">
+
+            <label for="">city</label>
+            <input type="text" formControlName="city" class="form-control">
+            <div *ngIf="cit && cit.invalid && cit.touched" class="error">
+                Field is Empty
+    
+            </div>
+
+            <label for="">state</label>
+            <input type="text" formControlName="state" class="form-control">
+            <div *ngIf="stat && stat.invalid && stat.touched" class="error">
+                Field is Empty
+    
+            </div>
+        </ng-container>
+<div class="d-flex justify-content-center gap-5 mt-2">
+
+    <button class="btn btn-success" (click)="add()">add</button>
+    
+    <button class="btn btn-primary"  (click)="pat()">update</button>
+</div>
+
+        
+        
+    </form>
+    <table class="table table-bordered">
+        <tr>
+            <th>name</th>
+            <th>roll no.</th>
+            <th>state</th>
+            <th>city</th>
+
+        </tr>
+        <tr *ngFor="let item of arr, let i = index">
+            <td >{{item.name}}</td>
+            <td >{{item.rollno}}</td>
+            <td >{{item.address.state}}</td>
+            <td >{{item.address.city}}</td>
+            <!-- <td><button (click)="pat(i)">patch</button></td> -->
+        </tr>
+
+    </table>
+</div>
